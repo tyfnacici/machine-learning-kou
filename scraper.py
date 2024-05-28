@@ -4,7 +4,7 @@ import requests
 import sys
 
 def html_save():
-    for year in range(2015,2024):
+    for year in range(2013,2019):
         for month in range(1,13):
             if(month<10):
                 url='http://en.tutiempo.net/climate/0{}-{}/ws-171300.html'.format(month

@@ -1,4 +1,4 @@
-from Plot_AQI import avg_data_2015,avg_data_2016,avg_data_2017,avg_data_2018,avg_data_2019,avg_data_2020,avg_data_2021,avg_data_2022,avg_data_2023
+from Plot_AQI import avg_data_2013,avg_data_2014,avg_data_2015,avg_data_2016, avg_data_2017, avg_data_2018
 import requests
 import sys
 import pandas as pd
@@ -29,21 +29,20 @@ def met_data(month, year):
             newtempD.append(tempD[0])
             tempD.pop(0)
         finalD.append(newtempD)
+
     length = len(finalD)
 
-    finalD = finalD[length - 1]
-
-    print(finalD)
-
+    finalD.pop(length - 1)
     finalD.pop(0)
-    finalD.pop(6)
-    finalD.pop(12)
-    finalD.pop(11)
-    finalD.pop(10)
-    finalD.pop(9)
-    finalD.pop(8)
-    finalD.pop(0)
-    
+
+    for a in range(len(finalD)):
+        finalD[a].pop(6)
+        finalD[a].pop(13)
+        finalD[a].pop(12)
+        finalD[a].pop(11)
+        finalD[a].pop(10)
+        finalD[a].pop(9)
+        finalD[a].pop(0)
 
     return finalD
 
@@ -57,11 +56,7 @@ def data_combine(year, cs):
 if __name__ == "__main__":
     if not os.path.exists("Data/Real-Data"):
         os.makedirs("Data/Real-Data")
-    
-    met_data(1,2017)
-
-
-    for year in range(2015, 2024):
+    for year in range(2013, 2019):
         final_data = []
         with open('Data/Real-Data/real_' + str(year) + '.csv', 'w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
@@ -90,17 +85,14 @@ if __name__ == "__main__":
                 if flag != 1:
                     wr.writerow(row)
                     
+    data_2013 = data_combine(2013, 600)
+    data_2014 = data_combine(2014, 600)
     data_2015 = data_combine(2015, 600)
     data_2016 = data_combine(2016, 600)
     data_2017 = data_combine(2017, 600)
     data_2018 = data_combine(2018, 600)
-    data_2019 = data_combine(2019, 600)
-    data_2020 = data_combine(2020, 600)
-    data_2021 = data_combine(2021, 600)
-    data_2022 = data_combine(2022, 600)
-    data_2023 = data_combine(2023, 600)
      
-    total=data_2015+data_2016+data_2017+data_2018+data_2019+data_2020+data_2021+data_2022+data_2023
+    total=data_2013+data_2014+data_2015+data_2016+data_2017+data_2018
     
     with open('Data/Real-Data/Real_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')

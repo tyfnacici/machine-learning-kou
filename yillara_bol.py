@@ -18,5 +18,5 @@ def separate_csv_by_year(input_file):
         print(f'Data for {year} written to {output_file}')
 
 # Example usage
-input_file = 'Data/AQI/ankara_aqi.csv'  # Name of your input CSV file
+input_file = 'Data/AQI/ankara_ordered.csv'  # Name of your input CSV file
 separate_csv_by_year(input_file)
